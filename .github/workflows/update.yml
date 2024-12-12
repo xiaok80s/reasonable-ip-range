@@ -13,13 +13,10 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-          test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-          echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
-          brew install cidrmerge
-          source ~/.bashrc
+          sudo apt-get install -y curl python3-venv
+          python3 -m venv .venv
+          source .venv/bin/activate
+          pip install netaddr
 
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -40,7 +37,9 @@ jobs:
             curl -s $url >> unmerged.txt || echo "Error: Failed to fetch $url"
           done
 
-          cat unmerged.txt | cidrmerge | sort -V > reasonable-ipv4.txt
+      - name: Merge
+        run: |
+          python merge.py --source unmerged.txt > | sort -V reasonable-ipv4.txt
 
       - name: Update Repository
         run: |
