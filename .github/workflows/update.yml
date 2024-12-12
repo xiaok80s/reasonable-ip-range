@@ -13,8 +13,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl
-          python -m venv .venv
+          sudo apt-get install -y curl python3-venv
+          python3 -m venv .venv
           source .venv/bin/activate
           pip install cidrmerge
 
