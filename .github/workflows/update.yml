@@ -13,15 +13,14 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl python3-venv
-          python3 -m venv .venv
-          source .venv/bin/activate
-          pip install cidrmerge
+          sudo apt-get install -y curl
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          brew install cidrmerge
 
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Fetch & Merge
+      - name: Fetch
         run: |
           ipv4_list=(
             "https://raw.githubusercontent.com/lord-alfred/ipranges/refs/heads/main/digitalocean/ipv4.txt"
