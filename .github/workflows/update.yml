@@ -21,7 +21,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.CI_WRITE_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fetch
         run: |
@@ -49,4 +49,4 @@ jobs:
           git config --global user.name "${{ github.actor }}"
           git add reasonable-ipv4.txt
           git commit -m "Update reasonable-ipv4.txt"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
+          git push
