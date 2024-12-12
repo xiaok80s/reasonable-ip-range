@@ -39,7 +39,7 @@ jobs:
 
       - name: Merge
         run: |
-          python merge.py --source unmerged.txt > | sort -V reasonable-ipv4.txt
+          python merge.py --source unmerged.txt | sort -V > reasonable-ipv4.txt
 
       - name: Update Repository
         run: |
