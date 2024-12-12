@@ -13,8 +13,10 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl python3-pip
-          pip3 install cidrmerge
+          sudo apt-get install -y curl
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install cidrmerge
 
       - name: Checkout Repository
         uses: actions/checkout@v3
